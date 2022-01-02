@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>Delete Worspaces</title>
+    <link rel="stylesheet" href="DeleteWS.css">
+</head>
+<body>
+    <div class="form-input">
+        <form id="form-input">
+            <label for="token">Bearer token. get it here https://docs.microsoft.com/rest/api/power-bi It will expire after one hour </label>
+            <input type="text" id="token" name="token" placeholder="Your token without bearer text">
+
+            <label for="url">API URL. Change the parameter for desired output, $top, $skip, $filter</label>
+            <input type="text" id="url" name="url" value="https://api.powerbi.com/v1.0/myorg/admin/groups?$expand=reports,datasets&$top=5000&$skip=0&%filter=type ne 'Personal Group'">
+
+            <label for="email">Email. Will give admin access to workspace. leave empty if account has permission to delete workspaces. </label>
+            <input type="text" id="email" name="email" placeholder="Email or leave empty" value="azure-royni@sodraskog.onmicrosoft.com">
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <ul class="ws-groups">
+        <li id="ws-count"> 
+           Number of workspaces
+        </li>
+        <li id="ws-empty"> 
+            Number of empty workspaces
+         </li>
+         <li id="ws-deleted"> 
+            Number of deleted workspaces
+         </li>
+    </ul>
+    <div class="list-groups">
+        <table>
+            <tr>
+                <th>Workspace</th>
+                <th>Type</th>
+                <th>State</th>
+                <th>
+                    Number of reports
+                    <button id="deleteAll">Delete All Empty</button>
+                </th>
+            </tr>
+        </table>
+    </div>
+    <script src="DeleteWSAPICall.js"></script>
+</body>
+</html>

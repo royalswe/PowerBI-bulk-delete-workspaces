@@ -1,0 +1,83 @@
+/** Table **/
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table tr:nth-child(odd) {
+  background: #edf1f2
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+button {
+  float: right;
+}
+
+/** Count workspaces **/
+ul {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  font: 15px "trebuchet MS", "lucida sans";
+}
+ul > li {
+  position: relative;
+  padding: 0.4em 0.4em 0.4em 2em;
+  background: #ddd;
+  color: #444;
+  text-decoration: none;
+  border-radius: 0.3em;
+}
+
+ul > li:before {
+  content: attr(title);
+  position: absolute;
+  left: -1.3em;
+  top: -30%;
+  background: #87ceeb;
+  height: 2.5em;
+  width: 2.5em;
+  line-height: 2.5em;
+  border: 0.3em solid #fff;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 2em;
+}
+
+/** Form **/
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #00845a;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #419e80;
+}
+
+.form-input {
+  border-radius: 5px;
+  background-color: #edf1f2;
+  padding: 20px;
+}
