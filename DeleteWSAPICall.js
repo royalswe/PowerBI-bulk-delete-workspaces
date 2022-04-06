@@ -31,9 +31,16 @@ function getReports(groups){
     for (let i = 0; i < groups.value.length; i++) {
         const reports = groups.value[i].reports;
         const datasets = groups.value[i].datasets;
+        const dashboards = groups.value[i].dashboards;
+        const dataflows = groups.value[i].dataflows;
+        const workbooks = groups.value[i].workbooks;
 
         groups.value[i].numOfReports = reports.length;
         groups.value[i].numOfdatasets = datasets.length;
+        groups.value[i].numOfDashboards = dashboards.length;
+        groups.value[i].numOfDataflows = dataflows.length;
+        groups.value[i].numOfWorkbooks = workbooks.length;
+        groups.value[i].numOfAssets = reports.length + datasets.length + dashboards.length + dataflows.length + workbooks.length;
 
         numOfWorkspaces++;
         AppendTable(groups.value[i]);
@@ -63,20 +70,30 @@ function AppendTable(gArray) {
     tdEle3.innerHTML = gArray.state;
     let tdEle4 = document.createElement('td');
     tdEle4.innerHTML = gArray.type;
+    let tdEle5 = document.createElement('td');
+    tdEle5.innerHTML = gArray.numOfdatasets;
+    let tdEle6 = document.createElement('td');
+    tdEle6.innerHTML = gArray.numOfDataflows;
+    let tdEle7 = document.createElement('td');
+    tdEle7.innerHTML = gArray.numOfDashboards;
+    let tdEle8 = document.createElement('td');
+    tdEle8.innerHTML = gArray.numOfWorkbooks;
     trEle.appendChild(tdEle4);
     trEle.appendChild(tdEle3);
     trEle.appendChild(tdEle2);
+    trEle.appendChild(tdEle5);
+    trEle.appendChild(tdEle6);
+    trEle.appendChild(tdEle7);
+    trEle.appendChild(tdEle8);
     table.appendChild(trEle);
-
-    if (gArray.numOfReports === 0 && gArray.state !== 'Deleted' && gArray.type !== 'PersonalGroup') {
+    
+// Can decide if you show all workspaces or just Active and non-Personal workspaces below
+    if (gArray.numOfAssets === 0 && gArray.state !== 'Deleted' && gArray.type !== 'PersonalGroup') {
         emptyGroupsCounter++
-        if (gArray.numOfdatasets > 0) {
-            return tdEle2.innerHTML += " but " + gArray.numOfdatasets + " datasets"
-        }
         emptyWorkspaceIds.push(gArray.id);
         let button = document.createElement('button');
         button.innerText = "Delete";
-        tdEle2.appendChild(button);
+        tdEle1.appendChild(button);
         button.addEventListener('click', () => { deleteWorkspace(gArray.id); });
     }
 
@@ -131,7 +148,7 @@ function deleteWorkspace(groupId) {
           deletedGroupsCounter++;
           document.getElementById('ws-deleted').title = deletedGroupsCounter;
         })
-        .catch(error => alert("Could not delete workspace: ", error));
+        .catch(error => alert("Could not delete workspace: " + groupid, error));
     })
 }
 
